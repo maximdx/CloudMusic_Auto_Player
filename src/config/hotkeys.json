@@ -1,0 +1,48 @@
+{
+  "description": "网易云音乐MCP控制器快捷键配置",
+  "platform_info": {
+    "windows": {
+      "modifier_keys": ["ctrl", "alt", "shift", "win"],
+      "description": "Windows平台快捷键配置"
+    },
+    "mac": {
+      "modifier_keys": ["cmd", "ctrl", "alt", "shift"],
+      "description": "Mac平台快捷键配置"
+    }
+  },
+  "hotkeys": {
+    "windows": {
+      "play_pause": "ctrl+alt+p",
+      "previous": "ctrl+alt+left",
+      "next": "ctrl+alt+right",
+      "volume_up": "ctrl+alt+up",
+      "volume_down": "ctrl+alt+down",
+      "mini_mode": "ctrl+alt+m",
+      "like_song": "ctrl+alt+l",
+      "lyrics": "ctrl+alt+d"
+    },
+    "mac": {
+      "play_pause": "cmd+alt+p",
+      "previous": "cmd+alt+left",
+      "next": "cmd+alt+right",
+      "volume_up": "cmd+alt+up",
+      "volume_down": "cmd+alt+down",
+      "mini_mode": "cmd+alt+m",
+      "like_song": "cmd+alt+l",
+      "lyrics": "cmd+alt+d"
+    }
+  },
+  "custom_hotkeys": {
+    "description": "用户可以在这里定义自定义快捷键，将覆盖默认配置",
+    "example": {
+      "play_pause": "ctrl+space",
+      "volume_up": "ctrl+shift+up"
+    }
+  },
+  "notes": [
+    "Windows用户建议使用 ctrl+alt 组合键",
+    "Mac用户建议使用 cmd+alt 组合键",
+    "可以在 custom_hotkeys 中覆盖默认设置",
+    "修改配置后需要重启MCP服务器生效"
+  ]
+} 

@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "auto-music-player": {
+      "command": "E:/Anaconda/python.exe",
+      "args": [
+        "E:/MCP_Project/CloudMusic_Auto_Player/src/server.py"
+      ],
+      "env": {
+        "PYTHONPATH": "E:/Anaconda"
+      }
+    }
+  }
+}

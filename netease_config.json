@@ -1,0 +1,11 @@
+{
+  "netease_music_path": "D:\\wangyiyunMusic\\CloudMusic\\cloudmusic.exe",
+  "debug_port": 9222,
+  "chromedriver_path": "src/chromedriver/win64/chromedriver.exe",
+  "description": "网易云音乐配置文件 - 用于每日推荐播放功能",
+  "notes": {
+    "netease_music_path": "网易云音乐客户端exe文件的完整路径，例如: C:\\Program Files (x86)\\Netease\\CloudMusic\\cloudmusic.exe",
+    "debug_port": "调试端口号，默认9222",
+    "chromedriver_path": "ChromeDriver的相对路径"
+  }
+}
