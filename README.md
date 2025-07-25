@@ -27,6 +27,8 @@
 - **全局快捷键**：支持全局快捷键控制，无需切换到音乐应用，支持按键自定义
 
 ### ⌨️ 全局快捷键支持
+
+#### Windows 默认快捷键
 - `Ctrl+Alt+P`：播放/暂停
 - `Ctrl+Alt+Left`：上一首
 - `Ctrl+Alt+Right`：下一首  
@@ -35,25 +37,67 @@
 - `Ctrl+Alt+L`：喜欢当前歌曲
 - `Ctrl+Alt+D`：显示/隐藏歌词
 
+#### macOS 默认快捷键
+- `Cmd+Alt+P`：播放/暂停
+- `Cmd+Alt+Left`：上一首
+- `Cmd+Alt+Right`：下一首  
+- `Cmd+Alt+Up/Down`：音量加/减
+- `Cmd+Alt+M`：切换迷你模式
+- `Cmd+Alt+L`：喜欢当前歌曲
+- `Cmd+Alt+D`：显示/隐藏歌词
+
+> 💡 可以在 `src/config/hotkeys.json` 的 `custom_hotkeys` 部分自定义快捷键
+
 ## 🔧 环境要求
 
-- **操作系统**：Windows 10/11
+### 通用要求
 - **Python**：3.10+
 - **网易云音乐客户端**：需安装并可正常运行
-- **Chrome浏览器**：用于每日推荐和漫游功能的页面操作
+- **uv**：现代 Python 包管理器 ([安装指南](https://docs.astral.sh/uv/getting-started/installation/))
 
-## 📦 安装依赖
+### 平台要求
+- **Windows 10/11**：完整功能支持
+  - Chrome浏览器：用于每日推荐和漫游功能的页面操作
+  - 内置 ChromeDriver (Windows x64)
+- **macOS 10.15+**：基础功能支持
+  - 支持全局快捷键和音乐播放控制
+  - 高级功能（每日推荐/漫游）需要手动安装 ChromeDriver
 
+## 📦 安装指南
+
+### 1. 安装 uv（如果尚未安装）
 ```bash
-pip install -r requirements.txt
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-### 依赖说明
+### 2. 克隆项目并安装依赖
+```bash
+git clone https://github.com/xiduan/CloudMusic_Auto_Player.git
+cd CloudMusic_Auto_Player
+uv sync
+```
+
+### 3. macOS 额外配置（可选，仅高级功能需要）
+如需使用每日推荐和私人漫游功能，需要安装 ChromeDriver：
+```bash
+# 使用 Homebrew 安装
+brew install chromedriver
+
+# 或手动下载安装
+# 下载地址：https://chromedriver.chromium.org/
+```
+
+### 主要依赖
 - `fastmcp>=2.0.0`：MCP 服务器框架
-- `pyautogui>=0.9.54`：全局快捷键支持
-- `pywin32>=306`：Windows 系统集成
+- `pyautogui>=0.9.54`：跨平台全局快捷键支持
+- `pywin32>=306`：Windows 系统集成（仅 Windows）
 - `psutil>=5.9.0`：进程管理
-- `selenium`：Web 自动化（每日推荐/漫游功能）
+- `selenium>=4.0.0`：Web 自动化（每日推荐/漫游功能）
+- `requests>=2.28.0`：HTTP 请求库
 
 ## ⚙️ 配置说明
 
@@ -61,6 +105,81 @@ pip install -r requirements.txt
 
 在你的 MCP 客户端配置文件中添加以下配置：
 
+#### 使用 uv 运行（推荐）
+```json
+{
+  "mcpServers": {
+    "auto-music-player": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--project",
+        "/path/to/CloudMusic_Auto_Player",
+        "src/server.py"
+      ],
+      "cwd": "/path/to/CloudMusic_Auto_Player"
+    }
+  }
+}
+```
+
+#### 平台特定路径示例
+
+**Windows 示例：**
+```json
+{
+  "mcpServers": {
+    "auto-music-player": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--project", 
+        "C:\\Users\\YourName\\CloudMusic_Auto_Player",
+        "src/server.py"
+      ],
+      "cwd": "C:\\Users\\YourName\\CloudMusic_Auto_Player"
+    }
+  }
+}
+```
+
+**macOS 示例：**
+```json
+{
+  "mcpServers": {
+    "auto-music-player": {
+      "command": "uv",
+      "args": [
+        "run",
+        "python",
+        "/Users/YourName/CloudMusic_Auto_Player/src/server.py"
+      ],
+      "cwd": "/Users/YourName/CloudMusic_Auto_Player"
+    }
+  }
+}
+```
+
+> ⚠️ **重要提示**：某些 MCP 客户端（如 Chatbox.ai）可能不会正确处理 `cwd` 中的相对路径，建议在 `args` 中使用绝对路径。
+
+#### 不同 MCP 客户端的配置差异
+
+**对于 Chatbox.ai 等客户端（推荐使用绝对路径）：**
+```json
+{
+  "mcpServers": {
+    "auto-music-player": {
+      "command": "/Users/YourName/CloudMusic_Auto_Player/.venv/bin/python",
+      "args": [
+        "/Users/YourName/CloudMusic_Auto_Player/src/server.py"
+      ],
+      "cwd": "/Users/YourName/CloudMusic_Auto_Player"
+    }
+  }
+}
+```
+
+#### 传统方式（备选方案）
 ```json
 {
   "mcpServers": {
@@ -81,18 +200,24 @@ pip install -r requirements.txt
 
 **重要：使用每日推荐和私人漫游功能前，必须先配置网易云音乐客户端路径。**
 
-使用以下任一方式配置：
+#### 方式一：通过 MCP 工具配置（推荐）
 
-#### 方式一：通过 MCP 工具配置
-```
+**Windows：**
+```python
 # 通过 MCP 客户端调用
 set_netease_music_path(netease_path="C:\\Program Files (x86)\\Netease\\CloudMusic\\cloudmusic.exe")
 ```
 
+**macOS：**
+```python
+# 通过 MCP 客户端调用
+set_netease_music_path(netease_path="/Applications/NeteaseMusic.app/Contents/MacOS/NeteaseMusic")
+```
+
 #### 方式二：手动编辑配置文件
 编辑项目根目录下的 `netease_config.json` 文件：
-如无特殊需求，chromedriver_path已经设置好了，无需配置
-netease_music_path可调用本mcp进行配置
+
+**Windows 配置示例：**
 ```json
 {
   "netease_music_path": "C:\\Program Files (x86)\\Netease\\CloudMusic\\cloudmusic.exe",
@@ -101,10 +226,25 @@ netease_music_path可调用本mcp进行配置
 }
 ```
 
-**常见网易云音乐安装路径：**
+**macOS 配置示例：**
+```json
+{
+  "netease_music_path": "/Applications/NeteaseMusic.app/Contents/MacOS/NeteaseMusic",
+  "debug_port": 9222,
+  "chromedriver_path": "/opt/homebrew/bin/chromedriver"
+}
+```
+
+#### 常见网易云音乐安装路径
+
+**Windows：**
 - `C:\Program Files (x86)\Netease\CloudMusic\cloudmusic.exe`
 - `C:\Program Files\Netease\CloudMusic\cloudmusic.exe`
 - `C:\Users\{用户名}\AppData\Local\NetEase\CloudMusic\cloudmusic.exe`
+
+**macOS：**
+- `/Applications/NeteaseMusic.app/Contents/MacOS/NeteaseMusic` (官方应用商店版本)
+- `/Applications/网易云音乐.app/Contents/MacOS/网易云音乐` (官网下载版本)
 
 ### 3. 自定义歌单配置
 
@@ -216,9 +356,25 @@ manage_custom_playlists(action="remove", playlist_name="旧歌单")
 - **搜索功能异常**：检查网络连接，确认网易云音乐 API 可正常访问
 
 ### 兼容性说明
-- 仅支持 Windows 操作系统
-- 需要网易云音乐桌面客户端（不支持UWP版本）
+
+#### 支持的操作系统
+- **Windows 10/11**：完整功能支持
+  - 全局快捷键控制 ✅
+  - 音乐搜索播放 ✅
+  - 每日推荐功能 ✅
+  - 私人漫游功能 ✅
+  - 内置 ChromeDriver ✅
+
+- **macOS 10.15+**：基础功能支持
+  - 全局快捷键控制 ✅
+  - 音乐搜索播放 ✅
+  - 每日推荐功能 ⚠️ (需手动安装 ChromeDriver)
+  - 私人漫游功能 ⚠️ (需手动安装 ChromeDriver)
+
+#### 客户端要求
+- 需要网易云音乐桌面客户端（不支持 UWP 版本）
 - 建议使用最新版本的网易云音乐客户端以获得最佳兼容性
+- macOS 用户推荐从官方网站下载桌面版本
 
 ## 📁 项目结构
 

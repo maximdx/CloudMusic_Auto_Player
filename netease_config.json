@@ -1,11 +1,31 @@
 {
-  "netease_music_path": "D:\\wangyiyunMusic\\CloudMusic\\cloudmusic.exe",
+  "netease_music_path": "",
   "debug_port": 9222,
   "chromedriver_path": "src/chromedriver/win64/chromedriver.exe",
   "description": "网易云音乐配置文件 - 用于每日推荐播放功能",
   "notes": {
-    "netease_music_path": "网易云音乐客户端exe文件的完整路径，例如: C:\\Program Files (x86)\\Netease\\CloudMusic\\cloudmusic.exe",
+    "netease_music_path": "网易云音乐客户端路径，通过 set_netease_music_path() MCP 工具配置",
     "debug_port": "调试端口号，默认9222",
-    "chromedriver_path": "ChromeDriver的相对路径"
+    "chromedriver_path": "ChromeDriver路径，Windows使用内置版本，macOS需手动安装"
+  },
+  "platform_examples": {
+    "windows": {
+      "netease_music_path": "C:\\Program Files (x86)\\Netease\\CloudMusic\\cloudmusic.exe",
+      "chromedriver_path": "src/chromedriver/win64/chromedriver.exe",
+      "common_paths": [
+        "C:\\Program Files (x86)\\Netease\\CloudMusic\\cloudmusic.exe",
+        "C:\\Program Files\\Netease\\CloudMusic\\cloudmusic.exe",
+        "C:\\Users\\{用户名}\\AppData\\Local\\NetEase\\CloudMusic\\cloudmusic.exe"
+      ]
+    },
+    "macos": {
+      "netease_music_path": "/Applications/NeteaseMusic.app/Contents/MacOS/NeteaseMusic",
+      "chromedriver_path": "/opt/homebrew/bin/chromedriver",
+      "common_paths": [
+        "/Applications/NeteaseMusic.app/Contents/MacOS/NeteaseMusic",
+        "/Applications/网易云音乐.app/Contents/MacOS/网易云音乐"
+      ],
+      "chromedriver_install": "brew install chromedriver"
+    }
   }
 }

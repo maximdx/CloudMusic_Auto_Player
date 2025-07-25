@@ -1,12 +1,40 @@
 {
+  "_comment": "MCP 客户端配置示例 - 请根据实际路径修改",
   "mcpServers": {
     "auto-music-player": {
-      "command": "E:/Anaconda/python.exe",
+      "command": "uv",
       "args": [
-        "E:/MCP_Project/CloudMusic_Auto_Player/src/server.py"
+        "run",
+        "--project",
+        "/path/to/CloudMusic_Auto_Player",
+        "src/server.py"
       ],
-      "env": {
-        "PYTHONPATH": "E:/Anaconda"
+      "cwd": "/path/to/CloudMusic_Auto_Player"
+    }
+  },
+  "_examples": {
+    "windows": {
+      "auto-music-player": {
+        "command": "uv",
+        "args": [
+          "run",
+          "--project",
+          "C:\\Users\\YourName\\CloudMusic_Auto_Player",
+          "src/server.py"
+        ],
+        "cwd": "C:\\Users\\YourName\\CloudMusic_Auto_Player"
+      }
+    },
+    "macos": {
+      "auto-music-player": {
+        "command": "uv",
+        "args": [
+          "run",
+          "--project",
+          "/Users/YourName/CloudMusic_Auto_Player",
+          "src/server.py"
+        ],
+        "cwd": "/Users/YourName/CloudMusic_Auto_Player"
       }
     }
   }
