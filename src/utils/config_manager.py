@@ -61,14 +61,14 @@ def get_default_hotkeys() -> Dict[str, str]:
     
     if current_platform == "mac":
         return {
-            "play_pause": "cmd+alt+p",
-            "previous": "cmd+alt+left",
-            "next": "cmd+alt+right",
-            "volume_up": "cmd+alt+up",
-            "volume_down": "cmd+alt+down",
-            "mini_mode": "cmd+alt+m",
-            "like_song": "cmd+alt+l",
-            "lyrics": "cmd+alt+d"
+            "play_pause": "command+option+p",
+            "previous": "command+option+left",
+            "next": "command+option+right",
+            "volume_up": "command+option+up",
+            "volume_down": "command+option+down",
+            "mini_mode": "command+option+m",
+            "like_song": "command+option+l",
+            "lyrics": "command+option+d"
         }
     else:  # Windows or Linux
         return {
