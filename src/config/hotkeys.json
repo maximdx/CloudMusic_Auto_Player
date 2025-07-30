@@ -6,7 +6,7 @@
       "description": "Windows平台快捷键配置"
     },
     "mac": {
-      "modifier_keys": ["cmd", "ctrl", "alt", "shift"],
+      "modifier_keys": ["command", "control", "option", "shift"],
       "description": "Mac平台快捷键配置"
     }
   },
@@ -22,14 +22,14 @@
       "lyrics": "ctrl+alt+d"
     },
     "mac": {
-      "play_pause": "cmd+alt+p",
-      "previous": "cmd+alt+left",
-      "next": "cmd+alt+right",
-      "volume_up": "cmd+alt+up",
-      "volume_down": "cmd+alt+down",
-      "mini_mode": "cmd+alt+m",
-      "like_song": "cmd+alt+l",
-      "lyrics": "cmd+alt+d"
+      "play_pause": "command+option+p",
+      "previous": "command+option+left",
+      "next": "command+option+right",
+      "volume_up": "command+option+up",
+      "volume_down": "command+option+down",
+      "mini_mode": "command+option+m",
+      "like_song": "command+option+l",
+      "lyrics": "command+option+d"
     }
   },
   "custom_hotkeys": {
@@ -41,7 +41,7 @@
   },
   "notes": [
     "Windows用户建议使用 ctrl+alt 组合键",
-    "Mac用户建议使用 cmd+alt 组合键",
+    "Mac用户建议使用 command+option 组合键",
     "可以在 custom_hotkeys 中覆盖默认设置",
     "修改配置后需要重启MCP服务器生效"
   ]
