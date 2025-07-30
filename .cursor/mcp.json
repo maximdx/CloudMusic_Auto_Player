@@ -1,13 +1,11 @@
 {
   "mcpServers": {
     "auto-music-player": {
-      "command": "E:/Anaconda/python.exe",
+      "command": "uvx",
       "args": [
-        "E:/MCP_Project/CloudMusic_Auto_Player/src/server.py"
+        "E:/MCP_Project/CloudMusic_Auto_Player/dist/cloudmusic_auto_player-1.0.0-py3-none-any.whl"
       ],
-      "env": {
-        "PYTHONPATH": "E:/Anaconda"
-      }
+      "cwd": "E:/MCP_Project/CloudMusic_Auto_Player"
     }
   }
 }

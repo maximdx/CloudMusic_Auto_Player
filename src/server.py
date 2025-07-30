@@ -9,23 +9,73 @@ from typing import Dict, Any
 from fastmcp import FastMCP
 
 # 导入各个模块
-from utils.config_manager import (
-    load_hotkeys_config,
-    load_custom_playlists,
-    load_playlists_from_file,
-    save_playlists_to_file,
-    load_netease_config,
-    save_netease_config,
-    get_platform
-)
-from utils.music_search import (
-    search_netease_music,
-    search_netease_playlist,
-    generate_play_url,
-    generate_playlist_play_url
-)
-from controllers.netease_controller import NeteaseMusicController
-from controllers.daily_controller import DailyRecommendController, SELENIUM_AVAILABLE
+import sys
+import os
+
+# 添加src目录到Python路径，确保可以找到模块
+current_dir = os.path.dirname(os.path.abspath(__file__))
+src_dir = os.path.dirname(current_dir) if os.path.basename(current_dir) == 'src' else current_dir
+if src_dir not in sys.path:
+    sys.path.insert(0, src_dir)
+
+try:
+    # 首先尝试直接导入（适用于打包后的环境）
+    from utils.config_manager import (
+        load_hotkeys_config,
+        load_custom_playlists,
+        load_playlists_from_file,
+        save_playlists_to_file,
+        load_netease_config,
+        save_netease_config,
+        get_platform
+    )
+    from utils.music_search import (
+        search_netease_music,
+        search_netease_playlist,
+        generate_play_url,
+        generate_playlist_play_url
+    )
+    from controllers.netease_controller import NeteaseMusicController
+    from controllers.daily_controller import DailyRecommendController, SELENIUM_AVAILABLE
+except ImportError:
+    try:
+        # 尝试相对导入（开发环境）
+        from .utils.config_manager import (
+            load_hotkeys_config,
+            load_custom_playlists,
+            load_playlists_from_file,
+            save_playlists_to_file,
+            load_netease_config,
+            save_netease_config,
+            get_platform
+        )
+        from .utils.music_search import (
+            search_netease_music,
+            search_netease_playlist,
+            generate_play_url,
+            generate_playlist_play_url
+        )
+        from .controllers.netease_controller import NeteaseMusicController
+        from .controllers.daily_controller import DailyRecommendController, SELENIUM_AVAILABLE
+    except ImportError:
+        # 最后尝试src前缀的绝对导入
+        from src.utils.config_manager import (
+            load_hotkeys_config,
+            load_custom_playlists,
+            load_playlists_from_file,
+            save_playlists_to_file,
+            load_netease_config,
+            save_netease_config,
+            get_platform
+        )
+        from src.utils.music_search import (
+            search_netease_music,
+            search_netease_playlist,
+            generate_play_url,
+            generate_playlist_play_url
+        )
+        from src.controllers.netease_controller import NeteaseMusicController
+        from src.controllers.daily_controller import DailyRecommendController, SELENIUM_AVAILABLE
 
 # 配置日志
 logging.basicConfig(level=logging.INFO)

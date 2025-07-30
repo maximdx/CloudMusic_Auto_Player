@@ -40,3 +40,4 @@ logs/
 *.tmp
 *.temp
 .cache/
+netease_config.json

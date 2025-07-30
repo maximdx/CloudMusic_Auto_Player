@@ -62,7 +62,7 @@ Repository = "https://github.com/xiduan/CloudMusic_Auto_Player"
 Issues = "https://github.com/xiduan/CloudMusic_Auto_Player/issues"
 
 [project.scripts]
-cloudmusic-mcp = "src.server:main"
+cloudmusic-auto-player = "src.server:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src"]

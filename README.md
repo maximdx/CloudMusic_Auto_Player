@@ -393,7 +393,7 @@ auto_music/
 
 ## 🤝 技术支持
 
-- **项目仓库**：[GitHub仓库地址]
+- **项目仓库**：https://github.com/SpongeBaby-124/CloudMusic_Auto_Player
 - **问题反馈**：请在 GitHub Issues 中提交
 - **联系邮箱**：lxd4094@foxmail.com
 
